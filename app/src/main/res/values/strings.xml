@@ -2,4 +2,5 @@
     <string name="app_name" translatable="false">SEP4-Android</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_account_sign_in_first">No account? Sign in first!</string>
 </resources>
