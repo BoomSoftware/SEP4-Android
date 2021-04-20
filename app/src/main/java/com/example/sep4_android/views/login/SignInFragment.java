@@ -9,13 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.fragment.app.FragmentManager;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
-import com.example.sep4_android.MainActivity;
+import com.example.sep4_android.LoginActivity;
 import com.example.sep4_android.R;
 
 public class SignInFragment extends Fragment {
@@ -81,7 +79,7 @@ public class SignInFragment extends Fragment {
                     Toast.makeText(view.getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    startActivity(new Intent(view.getContext(), MainActivity.class));
+                    startActivity(new Intent(view.getContext(), LoginActivity.class));
                 }
             }
 

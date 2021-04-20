@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/garden_graph.xml"
+    app:startDestination="@id/gardenOverviewFragment">
+
+    <fragment
+        android:id="@+id/gardenOverviewFragment"
+        android:name="com.example.sep4_android.views.garden.GardenOverviewFragment"
+        android:label="fragment_garden_overview"
+        tools:layout="@layout/fragment_garden_overview" >
+        <action
+            android:id="@+id/action_gardenOverviewFragment_to_plantOverviewFragment"
+            app:destination="@id/plantOverviewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/plantOverviewFragment"
+        android:name="com.example.sep4_android.views.garden.PlantOverviewFragment"
+        android:label="fragment_plant_overview"
+        tools:layout="@layout/fragment_plant_overview" >
+        <action
+            android:id="@+id/action_plantOverviewFragment_to_addNewPlantFragment"
+            app:destination="@id/addNewPlantFragment" />
+        <action
+            android:id="@+id/action_plantOverviewFragment_to_plantStatisticsFragment"
+            app:destination="@id/plantStatisticsFragment" />
+        <action
+            android:id="@+id/action_plantOverviewFragment_to_plantInformationFragment"
+            app:destination="@id/plantInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewPlantFragment"
+        android:name="com.example.sep4_android.views.garden.AddNewPlantFragment"
+        android:label="fragment_add_new_plant"
+        tools:layout="@layout/fragment_add_new_plant" />
+    <fragment
+        android:id="@+id/plantStatisticsFragment"
+        android:name="com.example.sep4_android.views.garden.PlantStatisticsFragment"
+        android:label="fragment_plant_statistics"
+        tools:layout="@layout/fragment_plant_statistics" />
+    <fragment
+        android:id="@+id/plantInformationFragment"
+        android:name="com.example.sep4_android.views.garden.PlantInformationFragment"
+        android:label="fragment_plant_information"
+        tools:layout="@layout/fragment_plant_information" />
+</navigation>
