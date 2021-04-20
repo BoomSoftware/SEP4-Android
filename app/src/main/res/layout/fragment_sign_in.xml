@@ -52,7 +52,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="221dp"
-        android:background="@drawable/plants"
+        android:background="@drawable/plant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
