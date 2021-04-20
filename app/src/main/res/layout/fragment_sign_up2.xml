@@ -9,13 +9,22 @@
 
 
     <EditText
+        android:id="@+id/input_register_username"
+        style="@style/input"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_sign_up_view_username" />
+
+    <EditText
         android:id="@+id/input_register_password"
         style="@style/input"
         android:layout_marginTop="4dp"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.733"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/text_sign_up_view_password" />
 
     <EditText
         android:id="@+id/input_register_password2"
@@ -24,12 +33,24 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/text_sign_up_view_password_2"
+        android:autofillHints="" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/text_sign_up_view_username"
         style="@style/input_title"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_sign_up_view_background" />
+
+    <TextView
+        android:id="@+id/text_sign_up_view_password_2"
+        style="@style/input_title"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:text="@string/password_confirm"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,18 +59,18 @@
         app:layout_constraintTop_toBottomOf="@+id/input_register_password" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/text_sign_up_view_password"
         style="@style/input_title"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:text="@string/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/input_register_username" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/text_sign_up_view_background"
         android:layout_width="match_parent"
         android:layout_height="280dp"
         android:background="@color/green_600"
@@ -67,6 +88,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_register_password2" />
+        app:layout_constraintTop_toBottomOf="@+id/input_register_password2"
+        app:layout_constraintVertical_bias="0.475" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
