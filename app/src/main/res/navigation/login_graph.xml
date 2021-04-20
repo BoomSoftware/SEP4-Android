@@ -19,7 +19,25 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_signInFragment"
+            android:id="@+id/action_signUpFragment_to_signUp2Fragment"
+            app:destination="@id/signUp2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp2Fragment"
+        android:name="com.example.sep4_android.views.login.SignUpFragment"
+        android:label="fragment_sign_up2"
+        tools:layout="@layout/fragment_sign_up2" >
+        <action
+            android:id="@+id/action_signUp2Fragment_to_signUp3Fragment"
+            app:destination="@id/signUp3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp3Fragment"
+        android:name="com.example.sep4_android.views.login.SignUpFragment"
+        android:label="fragment_sign_up3"
+        tools:layout="@layout/fragment_sign_up3" >
+        <action
+            android:id="@+id/action_signUp3Fragment_to_signInFragment"
             app:destination="@id/signInFragment" />
     </fragment>
 </navigation>
