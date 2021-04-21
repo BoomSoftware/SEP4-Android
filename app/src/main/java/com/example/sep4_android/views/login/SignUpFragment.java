@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-
 import com.example.sep4_android.R;
 
 public class SignUpFragment extends Fragment {
@@ -20,15 +19,23 @@ public class SignUpFragment extends Fragment {
     EditText editTextPassword2;
     EditText editTextName;
 
-    Button button;
+    Button buttonNext;
+    Button buttonSignUp;
 
-    RadioButton radioButton;
+    RadioButton radioButtonMale;
+    RadioButton radioButtonFemale;
+    RadioButton radioButtonNotSpecified;
+    RadioButton radioButtonOwnerYes;
+    RadioButton radioButtonOwnerNo;
+
     View view;
+    View view2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        view = inflater.inflate(R.layout.fragment_sign_up2, container, false);
+        view2 = inflater.inflate(R.layout.fragment_sign_up2, container, false);
         prepareUI();
         prepareOnClickEvents();
         return view;
@@ -39,19 +46,25 @@ public class SignUpFragment extends Fragment {
         editTextUsername = view.findViewById(R.id.input_register_username);
         editTextPassword = view.findViewById(R.id.input_register_password);
         editTextPassword2 = view.findViewById(R.id.input_register_password2);
-        editTextName = view.findViewById(R.id.input_register_name);
+        editTextName = view2.findViewById(R.id.input_register_name);
 
-        button = view.findViewById(R.id.button_login1);
-        button = view.findViewById(R.id.button_sign_up_next);
-        button = view.findViewById(R.id.button_sign_up);
+        buttonNext = view.findViewById(R.id.button_sign_up_next);
+        buttonSignUp = view2.findViewById(R.id.button_sign_up);
 
-        radioButton = view.findViewById(R.id.radio_female);
-        radioButton = view.findViewById(R.id.radio_male);
+        radioButtonMale = view2.findViewById(R.id.radio_female);
+        radioButtonFemale = view2.findViewById(R.id.radio_male);
+        radioButtonNotSpecified = view2.findViewById(R.id.radio_not_specified);
+        radioButtonOwnerYes = view2.findViewById(R.id.radio_owner_yes);
+        radioButtonOwnerNo = view2.findViewById(R.id.radio_owner_no);
     }
 
     private void prepareOnClickEvents() {
 
-        button.setOnClickListener(v -> {
+        buttonNext.setOnClickListener(v -> {
+
+        });
+
+        buttonSignUp.setOnClickListener(v -> {
 
         });
     }
