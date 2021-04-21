@@ -41,17 +41,6 @@ public class SignInFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_sign_in, container, false);
         signUp = view.findViewById(R.id.SU);
 
-//        signUp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SignUpFragment signUpFragment = new SignUpFragment();
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.signInFragment, signUpFragment);
-//                transaction.commit();
-//            }
-//        });
-//        FragmentManager manager =getSupportFragmentManager();
-//        manager.beginTransaction().replace(R.id.signInFragment,SignUpFragment);
         prepareOnClickEvents();
         prepareUI();
         prepareUIActions();
@@ -103,5 +92,3 @@ public class SignInFragment extends Fragment {
       signUp.setOnClickListener(v-> Navigation.findNavController(view).navigate(R.id.action_signInFragment_to_signUpFragment));    }
     }
 
-
-//
