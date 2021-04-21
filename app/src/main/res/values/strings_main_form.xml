@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings">Settings</string>
+    <string name="view_garden">View Garden</string>
+    <string name="add_garden">Add Garden</string>
+</resources>

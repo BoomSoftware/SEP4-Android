@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="name">Name</string>
-    <string name="birth">Date of birth</string>
-    <string name="sex">Sex</string>
-    <string name="owner">Owner</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-    <string name="notSpecified">Not Specified</string>
-    <string name="next">Next</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="gardener">Gardener</string>
+    <string name="assistant">Assistant</string>
 </resources>
