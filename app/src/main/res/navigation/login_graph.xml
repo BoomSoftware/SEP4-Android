@@ -3,29 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_graph.xml"
+    android:fitsSystemWindows="true"
     app:startDestination="@id/signInFragment">
-    <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.example.sep4_android.views.login.SignInFragment"
-        android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
-        <action
-            android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
-    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.sep4_android.views.login.SignUpFragment"
-        android:label="fragment_sign_up"
+        android:label=""
         tools:layout="@layout/fragment_sign_up" />
     <fragment
-        android:id="@+id/signUp2Fragment"
-        android:name="com.example.sep4_android.views.login.SignUpFragment"
-        android:label="fragment_sign_up2"
-        tools:layout="@layout/fragment_sign_up2" />
-    <fragment
-        android:id="@+id/signUp3Fragment"
-        android:name="com.example.sep4_android.views.login.SignUpFragment"
-        android:label="fragment_sign_up3"
-        tools:layout="@layout/fragment_sign_up3" />
+        android:id="@+id/signInFragment"
+        android:name="com.example.sep4_android.views.login.SignInFragment"
+        android:label=""
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_go_to_sign_up"
+            app:destination="@id/signUpFragment" />
+    </fragment>
 </navigation>

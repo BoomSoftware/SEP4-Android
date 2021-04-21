@@ -5,103 +5,102 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
-import com.example.sep4_android.LoginActivity;
+import com.example.sep4_android.MainAppActivity;
 import com.example.sep4_android.R;
+import com.example.sep4_android.viewmodels.LoginViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import es.dmoral.toasty.Toasty;
 
 public class SignInFragment extends Fragment {
 
+    private final int RC_SIGN_IN = 1;
+
     private View view;
+    private LoginViewModel loginViewModel;
 
-    private EditText username;
-    private EditText password;
-    private Button login;
-    private TextView signUp;
+    private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
 
-    String inputUsername = "";
-    String inputPassword = "";
-
-    static class Credentials {
-        String name = "Admin";
-        String password = "123456";
-    }
-
-    boolean isValid = false;
+    private SignInButton googleSignInButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_sign_in, container, false);
-        signUp = view.findViewById(R.id.SU);
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(view.getContext(), gso);
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            Intent intent = new Intent(getContext(), MainAppActivity.class);
+            startActivity(intent);
+        }
 
-//        signUp.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SignUpFragment signUpFragment = new SignUpFragment();
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.signInFragment, signUpFragment);
-//                transaction.commit();
-//            }
-//        });
-//        FragmentManager manager =getSupportFragmentManager();
-//        manager.beginTransaction().replace(R.id.signInFragment,SignUpFragment);
-        prepareOnClickEvents();
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
         prepareUI();
-        prepareUIActions();
+        prepareOnClickActions();
         return view;
 
     }
 
     private void prepareUI() {
-        username = view.findViewById(R.id.input_login_username);
-        password = view.findViewById(R.id.input_login_password);
-        login = view.findViewById(R.id.button_login);
+        googleSignInButton = view.findViewById(R.id.button_google_sign_in);
     }
 
-    private void prepareUIActions() {
-        login.setOnClickListener(v -> {
-            inputUsername = username.getText().toString();
-            inputPassword = password.getText().toString();
-
-            if (inputUsername.isEmpty() || inputPassword.isEmpty()) {
-                Toast.makeText(view.getContext(), "Please enter name and password!", Toast.LENGTH_LONG).show();
-            } else {
-
-                isValid = validate(inputUsername, inputPassword);
-                if (!isValid) {
-                    Toast.makeText(view.getContext(), "Wrong credentials", Toast.LENGTH_SHORT).show();
-                } else {
-
-                    startActivity(new Intent(view.getContext(), LoginActivity.class));
-                }
-            }
-
+    private void prepareOnClickActions() {
+        googleSignInButton.setOnClickListener(v -> {
+            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+            startActivityForResult(signInIntent, RC_SIGN_IN);
         });
     }
 
-    private boolean validate(String inputUsername, String inputPassword) {
-        Credentials credentials = new Credentials();
-
-        if (inputUsername.equals(credentials.name) && inputPassword.equals(credentials.password)) {
-            return true;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+                Toasty.error(getContext(), getContext().getString(R.string.invalid_auth), Toasty.LENGTH_SHORT).show();
+            }
         }
-
-        return false;
     }
 
-
-
-    private void prepareOnClickEvents()
-   {
-      signUp.setOnClickListener(v-> Navigation.findNavController(view).navigate(R.id.action_signInFragment_to_signUpFragment));    }
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(getActivity(), task -> {
+                    if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        loginViewModel.searchForUser(user.getUid());
+                        if(loginViewModel.searchForUser(user.getUid())){
+                                Intent intent = new Intent(view.getContext(), MainAppActivity.class);
+                                view.getContext().startActivity(intent);
+                            }
+                            else{
+                                Navigation.findNavController(view).navigate(R.id.action_go_to_sign_up);
+                            }
+                    } else {
+                        Toasty.error(getContext(), getContext().getString(R.string.invalid_auth), Toasty.LENGTH_SHORT).show();
+                    }
+                });
     }
-
-
-//
+}

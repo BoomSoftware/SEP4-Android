@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceGenerator {
     private static Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-            .baseUrl("http://localhost:3000")
+            .baseUrl("")
             .addConverterFactory(GsonConverterFactory.create());
 
     private static Retrofit retrofit = retrofitBuilder.build();
@@ -16,8 +16,8 @@ public class ServiceGenerator {
     public static GardenApi getGardenApi(){
         return gardenApi;
     }
-
     public static PlantApi getPlantApi() {
         return  plantApi;
     }
+    public static UserApi getUserApi() { return userApi; }
 }

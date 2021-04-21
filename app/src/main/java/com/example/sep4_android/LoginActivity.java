@@ -2,9 +2,28 @@ package com.example.sep4_android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        mAuth = FirebaseAuth.getInstance();
+        if(mAuth.getCurrentUser() != null){
+            Intent intent = new Intent(this, MainAppActivity.class);
+            startActivity(intent);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
