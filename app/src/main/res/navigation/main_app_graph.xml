@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_mainPageFragment_to_gardenListFragment"
             app:destination="@id/gardenListFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_addGardenFragment"
+            app:destination="@id/addGardenFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -23,13 +26,9 @@
         android:label="SettingsFragment" />
     <fragment
         android:id="@+id/gardenListFragment"
-        android:name="com.example.sep4_android.views.mainapp.GardenListFragment"
+        android:name="com.example.sep4_android.views.mainapp.GardenFragment"
         android:label="fragment_garden_list"
-        tools:layout="@layout/fragment_garden_list" >
-        <action
-            android:id="@+id/action_gardenListFragment_to_addGardenFragment"
-            app:destination="@id/addGardenFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_garden" />
     <fragment
         android:id="@+id/addGardenFragment"
         android:name="com.example.sep4_android.views.mainapp.AddGardenFragment"

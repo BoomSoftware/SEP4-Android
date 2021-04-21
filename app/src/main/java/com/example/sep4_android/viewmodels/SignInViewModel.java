@@ -1,4 +1,6 @@
 package com.example.sep4_android.viewmodels;
 
-public class SignInViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class SignInViewModel extends ViewModel {
 }
