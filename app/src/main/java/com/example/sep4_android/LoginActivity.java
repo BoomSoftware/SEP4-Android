@@ -12,19 +12,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        mAuth = FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser() != null){
-            Intent intent = new Intent(this, MainAppActivity.class);
-            startActivity(intent);
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

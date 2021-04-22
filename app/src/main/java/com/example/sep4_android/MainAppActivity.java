@@ -9,11 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.bumptech.glide.Glide;
+import com.example.sep4_android.viewmodels.LoginViewModel;
+import com.example.sep4_android.viewmodels.MainPageActivityViewModel;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -24,23 +27,34 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainAppActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private GoogleSignInClient mGoogleSignInClient;
+//    private GoogleSignInClient mGoogleSignInClient;
     private NavigationView navigationView;
+    private MainPageActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//        mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
 
+        viewModel = new ViewModelProvider(this).get(MainPageActivityViewModel.class);
         setContentView(R.layout.activity_app_main);
         prepareToolbar();
         setNavigationViewListener();
-        setNavigationHeader();
+        checkIfSignedIn();
+    }
+
+    private void checkIfSignedIn() {
+        viewModel.getCurrentUser().observe(this, user -> {
+            if (user != null) {
+                setNavigationHeader();
+            } else
+                startActivity(new Intent(this, LoginActivity.class));
+        });
     }
 
     private void prepareToolbar() {
@@ -61,27 +75,35 @@ public class MainAppActivity extends AppCompatActivity implements NavigationView
     }
 
     private void setNavigationHeader() {
-        GoogleSignInAccount userInfo = GoogleSignIn.getLastSignedInAccount(this);
-        if (userInfo != null) {
-            View header = navigationView.getHeaderView(0);
-            TextView headerName = header.findViewById(R.id.nav_header_name);
-            ImageView headerAvatar = header.findViewById(R.id.nav_header_avatar);
+//        GoogleSignInAccount userInfo = GoogleSignIn.getLastSignedInAccount(this);
+//        if (userInfo != null) {
+        View header = navigationView.getHeaderView(0);
+        TextView headerName = header.findViewById(R.id.nav_header_name);
+        ImageView headerAvatar = header.findViewById(R.id.nav_header_avatar);
 
-            headerName.setText(userInfo.getDisplayName());
-            Glide.with(this).load(userInfo.getPhotoUrl()).into(headerAvatar);
-        }
+        viewModel.getCurrentUser().observe(this, user -> {
+            if (user != null){
+                headerName.setText(user.getDisplayName());
+                Glide.with(this).load(user.getPhotoUrl()).into(headerAvatar);
+            }
+        });
+
+
+
+//        }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_item_logout: {
-                mGoogleSignInClient.signOut()
-                        .addOnCompleteListener(this, task -> {
-                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                            FirebaseAuth.getInstance().signOut();
-                            startActivity(intent);
-                        });
+                viewModel.signOut();
+//                mGoogleSignInClient.signOut()
+//                        .addOnCompleteListener(this, task -> {
+//                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+//                            FirebaseAuth.getInstance().signOut();
+//                            startActivity(intent);
+//                        });
             }
         }
         return true;
