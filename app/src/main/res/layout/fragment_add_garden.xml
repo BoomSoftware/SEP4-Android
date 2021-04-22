@@ -48,7 +48,7 @@
     <EditText
         android:id="@+id/input_garden_name"
         style="@style/input"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/garden_name" />
@@ -69,7 +69,7 @@
     <EditText
         android:id="@+id/input_land_area"
         style="@style/input"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/garden_land_area"
@@ -94,7 +94,7 @@
         android:id="@+id/input_city"
         style="@style/input"
         android:layout_marginTop="4dp"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/garden_city" />
@@ -116,7 +116,7 @@
         android:id="@+id/input_street"
         style="@style/input"
         android:layout_marginTop="4dp"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/garden_street" />
@@ -138,7 +138,7 @@
         android:id="@+id/input_street_number"
         style="@style/input"
         android:layout_marginTop="4dp"
-        android:inputType="textPassword"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/garden_street_number" />
