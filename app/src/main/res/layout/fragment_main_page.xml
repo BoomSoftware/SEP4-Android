@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/text_sign_up_view"
         android:layout_width="match_parent"
-        android:layout_height="375dp"
+        android:layout_height="221dp"
         android:background="@drawable/plant"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
