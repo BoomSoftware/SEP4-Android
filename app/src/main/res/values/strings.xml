@@ -17,4 +17,9 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="garden_name">Graden Name</string>
+    <string name="garden_land_area">Land Area</string>
+    <string name="garden_city">City</string>
+    <string name="garden_street">Street</string>
+    <string name="garden_street_number">Street Number</string>
 </resources>

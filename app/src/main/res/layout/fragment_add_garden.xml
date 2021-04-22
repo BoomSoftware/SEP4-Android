@@ -1,14 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.mainapp.AddGardenFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.mainapp.AddGardenFragment"
+    android:background="@color/green_100">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/plant_background"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="221dp"
+        android:background="@drawable/plant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/add_garden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:text="Add your garden"
+        android:textColor="@color/green_700"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/garden_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plant_background"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/garden_name"
+        style="@style/input_title"
+        android:layout_marginEnd="30dp"
+        android:text="@string/garden_name"
+        android:textColor="@color/green_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="266dp" />
+
+    <EditText
+        android:id="@+id/input_garden_name"
+        style="@style/input"
+        android:inputType="textPassword
+       app:layout_constraintBottom_toBottomOf="
+        app:layout_constraintBottom_toTopOf="@+id/garden_land_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/garden_name"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/garden_land_area"
+        style="@style/input_title"
+        android:layout_marginEnd="30dp"
+        android:text="@string/garden_land_area"
+        android:textColor="@color/green_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="342dp" />
+
+    <EditText
+        android:id="@+id/input_land_area"
+        style="@style/input"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/garden_land_area"
+        app:layout_constraintVertical_bias="0.525"
+        />
+
+
+    <TextView
+        android:id="@+id/garden_city"
+        style="@style/input_title"
+        android:layout_marginEnd="30dp"
+        android:text="@string/garden_city"
+        android:textColor="@color/green_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="420dp" />
+
+    <EditText
+        android:id="@+id/input_city"
+        style="@style/input"
+        android:layout_marginTop="4dp"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/garden_city" />
+
+    <TextView
+        android:id="@+id/garden_street"
+        style="@style/input_title"
+        android:layout_marginEnd="30dp"
+        android:text="@string/garden_street"
+        android:textColor="@color/green_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="496dp" />
+
+    <EditText
+        android:id="@+id/input_street"
+        style="@style/input"
+        android:layout_marginTop="4dp"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/garden_street" />
+
+    <TextView
+        android:id="@+id/garden_street_number"
+        style="@style/input_title"
+        android:layout_marginEnd="30dp"
+        android:text="@string/garden_street_number"
+        android:textColor="@color/green_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="576dp" />
+
+    <EditText
+        android:id="@+id/input_street_number"
+        style="@style/input"
+        android:layout_marginTop="4dp"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/garden_street_number" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/green_button"
+        app:layout_constraintTop_toBottomOf="@+id/input_street_number" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
