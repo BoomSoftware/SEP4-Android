@@ -9,11 +9,16 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
 import com.example.sep4_android.MainAppActivity;
 import com.example.sep4_android.R;
+import com.example.sep4_android.models.Gardener;
 import com.example.sep4_android.viewmodels.LoginViewModel;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.common.SignInButton;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,27 +32,11 @@ public class SignInFragment extends Fragment {
 
     private View view;
     private LoginViewModel loginViewModel;
-
-//    private FirebaseAuth mAuth;
-//    private GoogleSignInClient mGoogleSignInClient;
-
     private SignInButton googleSignInButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
-//        mGoogleSignInClient = GoogleSignIn.getClient(view.getContext(), gso);
-//        mAuth = FirebaseAuth.getInstance();
-//        if(mAuth.getCurrentUser() != null){
-//            Intent intent = new Intent(getContext(), MainAppActivity.class);
-//            startActivity(intent);
-//        }
-
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         checkIfSignedIn();
         view = inflater.inflate(R.layout.fragment_sign_in, container, false);
@@ -60,8 +49,14 @@ public class SignInFragment extends Fragment {
     private void checkIfSignedIn(){
         loginViewModel.getCurrentUser().observe(getViewLifecycleOwner(), firebaseUser -> {
             if(firebaseUser != null){
-                Intent intent = new Intent(view.getContext(), MainAppActivity.class);
-                view.getContext().startActivity(intent);
+                loginViewModel.getStatus().observe(getViewLifecycleOwner(), status -> {
+                    if(status){
+                        Intent intent = new Intent(getContext(), MainAppActivity.class);
+                        getContext().startActivity(intent);
+                    }else{
+                        Navigation.findNavController(view).navigate(R.id.action_go_to_sign_up);
+                    }
+                });
             }
         });
     }
@@ -72,8 +67,6 @@ public class SignInFragment extends Fragment {
 
     private void prepareOnClickActions() {
         googleSignInButton.setOnClickListener(v -> {
-//            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-//            startActivityForResult(signInIntent, RC_SIGN_IN);
             signIn();
         });
     }
@@ -101,46 +94,17 @@ public class SignInFragment extends Fragment {
 
     private void handleSignInRequest(int resultCode){
         if(resultCode == RESULT_OK) {
-            Intent intent = new Intent(view.getContext(), MainAppActivity.class);
-            view.getContext().startActivity(intent);
+            loginViewModel.getStatus().observe(getActivity(), status -> {
+                if(status){
+                    Intent intent = new Intent(getContext(), MainAppActivity.class);
+                    getContext().startActivity(intent);
+                }
+            });
+
         }
         else{
             Toasty.error(getContext(), getContext().getString(R.string.invalid_auth), Toasty.LENGTH_SHORT).show();
         }
 
     }
-
-    //    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == RC_SIGN_IN) {
-//            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-//            try {
-//                GoogleSignInAccount account = task.getResult(ApiException.class);
-//                firebaseAuthWithGoogle(account.getIdToken());
-//            } catch (ApiException e) {
-//                Toasty.error(getContext(), getContext().getString(R.string.invalid_auth), Toasty.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-
-//    private void firebaseAuthWithGoogle(String idToken) {
-//        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-//        mAuth.signInWithCredential(credential)
-//                .addOnCompleteListener(getActivity(), task -> {
-//                    if (task.isSuccessful()) {
-//                        FirebaseUser user = mAuth.getCurrentUser();
-//                        loginViewModel.searchForUser(user.getUid());
-//                        if(loginViewModel.searchForUser(user.getUid())){
-//                                Intent intent = new Intent(view.getContext(), MainAppActivity.class);
-//                                view.getContext().startActivity(intent);
-//                            }
-//                            else{
-//                                Navigation.findNavController(view).navigate(R.id.action_go_to_sign_up);
-//                            }
-//                    } else {
-//                        Toasty.error(getContext(), getContext().getString(R.string.invalid_auth), Toasty.LENGTH_SHORT).show();
-//                    }
-//                });
-//    }
 }

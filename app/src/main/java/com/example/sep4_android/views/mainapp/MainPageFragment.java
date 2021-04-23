@@ -13,6 +13,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainPageFragment extends Fragment {
 
@@ -39,7 +41,15 @@ public class MainPageFragment extends Fragment {
     }
 
     private void prepareOnClickEvents(){
-     buttonAddGarden.setOnClickListener(v -> Navigation.findNavController(view).navigate(R.id.action_mainPageFragment_to_addGardenFragment));
+     buttonAddGarden.setOnClickListener(v -> {
+         FirebaseDatabase database = FirebaseDatabase.getInstance();
+         DatabaseReference myRef = database.getReference("message");
+         String id = myRef.push().getKey();
+         System.out.println("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT" + id);
+
+         myRef.setValue("Hello, World!");
+         Navigation.findNavController(view).navigate(R.id.action_mainPageFragment_to_addGardenFragment);
+     });
      buttonSettings.setOnClickListener(v ->  Navigation.findNavController(view).navigate(R.id.action_mainPageFragment_to_settingsFragment));
      buttonViewGarden.setOnClickListener(v ->  Navigation.findNavController(view).navigate(R.id.action_mainPageFragment_to_gardenListFragment));
     }

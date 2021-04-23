@@ -26,20 +26,12 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainAppActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-//    private GoogleSignInClient mGoogleSignInClient;
     private NavigationView navigationView;
     private MainPageActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
-//        mGoogleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
 
         viewModel = new ViewModelProvider(this).get(MainPageActivityViewModel.class);
         setContentView(R.layout.activity_app_main);
@@ -75,8 +67,6 @@ public class MainAppActivity extends AppCompatActivity implements NavigationView
     }
 
     private void setNavigationHeader() {
-//        GoogleSignInAccount userInfo = GoogleSignIn.getLastSignedInAccount(this);
-//        if (userInfo != null) {
         View header = navigationView.getHeaderView(0);
         TextView headerName = header.findViewById(R.id.nav_header_name);
         ImageView headerAvatar = header.findViewById(R.id.nav_header_avatar);
@@ -87,10 +77,6 @@ public class MainAppActivity extends AppCompatActivity implements NavigationView
                 Glide.with(this).load(user.getPhotoUrl()).into(headerAvatar);
             }
         });
-
-
-
-//        }
     }
 
     @Override
@@ -98,12 +84,6 @@ public class MainAppActivity extends AppCompatActivity implements NavigationView
         switch (item.getItemId()) {
             case R.id.nav_item_logout: {
                 viewModel.signOut();
-//                mGoogleSignInClient.signOut()
-//                        .addOnCompleteListener(this, task -> {
-//                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-//                            FirebaseAuth.getInstance().signOut();
-//                            startActivity(intent);
-//                        });
             }
         }
         return true;

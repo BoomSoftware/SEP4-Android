@@ -6,6 +6,8 @@ public class Gardener {
     private String googleID;
     private boolean isOwner;
 
+    public Gardener(){}
+
     public Gardener(String name, String googleID, boolean isOwner) {
         this.name = name;
         this.googleID = googleID;

@@ -2,6 +2,7 @@
   "project_info": {
     "project_number": "74060993670",
     "project_id": "sep4-android",
+    "firebase_url": "https://sep4-android-default-rtdb.europe-west1.firebasedatabase.app/",
     "storage_bucket": "sep4-android.appspot.com"
   },
   "client": [

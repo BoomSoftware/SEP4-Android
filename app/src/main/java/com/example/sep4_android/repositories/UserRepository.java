@@ -2,21 +2,25 @@ package com.example.sep4_android.repositories;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-
 import com.example.sep4_android.models.Gardener;
 import com.example.sep4_android.models.UserLiveData;
-import com.example.sep4_android.networking.ServiceGenerator;
-import com.example.sep4_android.networking.UserApi;
+import com.example.sep4_android.models.UserStatusLiveData;
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseUser;
-
-import retrofit2.Call;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserRepository {
     private final Application application;
     private final UserLiveData currentUser;
     private static UserRepository instance;
+    private DatabaseReference myRef;
+
 
     private UserRepository(Application application){
         this.application = application;
@@ -30,29 +34,14 @@ public class UserRepository {
         return instance;
     }
 
-    public boolean searchForUser(String userUID){
-        UserApi userApi = ServiceGenerator.getUserApi();
-        Call<Boolean> call = userApi.searchForUser(userUID);
-        try{
-            return true;
-//            return call.execute().body().booleanValue();
-        }
-        catch (Exception exception){
-            return false;
-        }
+    public void createUser(String uid, boolean isOwner){
+        myRef = FirebaseDatabase.getInstance().getReference().child("users").child(uid);
+        myRef.setValue(isOwner);
     }
 
-    public boolean createUser(Gardener gardener){
-        UserApi userApi = ServiceGenerator.getUserApi();
-        Call<Boolean> callSync = userApi.createUser(gardener);
-        try{
-            return true;
-//            return callSync.execute().body().booleanValue();
-        }
-        catch (Exception exception){
-            System.out.println(exception.getMessage());
-            return false;
-        }
+    public UserStatusLiveData getStatus(String uid){
+        myRef = FirebaseDatabase.getInstance().getReference("users");
+        return new UserStatusLiveData(myRef, uid);
     }
 
     public LiveData<FirebaseUser> getCurrentUser(){
