@@ -11,7 +11,6 @@ public class ServiceGenerator {
     private static Retrofit retrofit = retrofitBuilder.build();
     private static GardenApi gardenApi = retrofit.create(GardenApi.class);
     private static PlantApi plantApi = retrofit.create(PlantApi.class);
-    private static UserApi userApi = retrofit.create(UserApi.class);
 
     public static GardenApi getGardenApi(){
         return gardenApi;
@@ -19,5 +18,4 @@ public class ServiceGenerator {
     public static PlantApi getPlantApi() {
         return  plantApi;
     }
-    public static UserApi getUserApi() { return userApi; }
 }
